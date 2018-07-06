@@ -1,5 +1,3 @@
-from random import randint
-
 lst = [
     {"id": "ares", "name": "Ares", "class": "guardian", "nicknames": []},
     {"id": "artio", "name": "Artio", "class": "guardian", "nicknames": []},
