@@ -1,381 +1,77 @@
-import random
-import sys
-dir(random)
 from random import randint
+from data import gods
+
+print(gods.name_index)
 
 # Start to the Function
-def Start():
-    options = ["start","physical","magical","p","m","assassin","warrior","hunter","mage","guardian","achilles","agni","ah muzen cab","amc","ah puch","amaterasu","anhur","anubis","goobis","ao kuang","aphrodite","apollo","arachne","ares","artemis","artio","athena","awilix","bacchus","bakasura","baron samedi","bastet","bellona","cabrakan","camazotz","cerberus","cernunnos","chaac","chang'e","change","chernobog","chiron","chronos","cu chulainn","cu chu","cupid","da ji","discordia","erlang shen","fafnir","fenrir","freya","ganesha","ganesh","geb","guan yu","hachiman","hades","he bo","hel","hercules","hou yi","hun batz","isis","izanami","janus","jing wei","kali","khepri","kukulkan","kuku","kumbhakarna","kumbha","kuzenbo","loki","cancer","medusa","mercury","ne zha","trap","neith","nemesis","nike","nox","nu wa","odin","osiris","poseidon","ra","raijin","rama","ratatoskr","ravana","scylla","serqet","skadi","sobek","sol","sun wunkong","susano","sylvanus","terra","thanatos","the morrigan","thor","thoth","not a chicken","tyr","ullr","vamana","vulcan","xbalanque","xing tian","ymir","masterhat","zeus","zhong kui","ghostbusters"]
-    choice = ""
-    while choice not in options:
-        print('''Welcome to the SMITE Random God and Build Generator v1.03 by elijahn't.
+def start():
+    choice = None
+    while choice is None:
+        print('''Welcome to the SMITE Random God and Build Generator v1.04 by elijahn't & digzol.
 Enter a God of your choice, a Class of your choice, Physical or Magical, or type
 Start for a random God.''')
         choice = str(input(">>>")).lower()
-    if choice == options[0]:
-        randomgod = randint(1,2)
-    # Physical God Random
-        if randomgod == 1:
-            print("Randomizing, hold onto your memes!")
-            print("You got a Physical God!")
+
+        if choice == "start":
+            select_random_god()
+        elif choice == "physical" or choice == "p":  # Physical God Choice
+            print("You chose a Random Physical God!")
             physical()
-    # Magical God Random
-        if randomgod == 2:
-            print("Randomizing, hold onto your memes!")
-            print("You got a Magical God!")
+        elif choice == "magical" or choice == "m":  # Magical God Choice
+            print("You chose a Random Magical God!")
             magical()
-    # Physical God Choice
-    if choice == options[1]:
-        print("You chose a Random Physical God!")
+        elif choice == "assassin" or choice == "warrior" or choice == "hunter" or choice == "mage" or choice == "guardian":
+            select_god_by_class(choice)
+        elif choice in gods.name_index:
+            select_god_by_name(choice)
+        else:
+            choice = None
+
+
+def select_random_god():
+    r = randint(1, 2)
+
+    print("Randomizing, hold onto your memes!")
+
+    if r == 1:  # Physical God Random
+        print("You got a Physical God!")
         physical()
-    if choice == options[3]:
-        print("You chose a Random Physical God!")
-        physical()
-    # Magical God Choice
-    if choice == options[2]:
-        print("You chose a Random Magical God!")
+    elif r == 2:  # Magical God Random
+        print("You got a Magical God!")
         magical()
-    if choice == options[4]:
-        print("You chose a Random Magical God!")
-        magical()
-    if choice == options[5]:
-        print("You have chosen a Random Assassin!")
-        assassin()
-    if choice == options[6]:
-        print("You have chosen a Random Warrior!")
-        warrior()
-    if choice == options[7]:
-        print("You have chosen a Random Hunter!")
-        hunter()
-    if choice == options[8]:
-        print("You have chosen a Random Mage!")
-        mage()
-    if choice == options[9]:
-        print("You have chosen a Random Guardian!")
-        guardian()
-    if choice == options[10]:
-        print("You have chosen Achilles!")
-        chosenPhysical()
-    if choice == options[11]:
-        print("You have chosen Agni!")
-        chosenMagical()
-    if choice == options[12]:
-        print("You have chosen Ah Muzen Cab!")
-        chosenPhysical()
-    if choice == options[13]:
-        print("You have chosen Ah Muzen Cab!")
-        chosenPhysical()
-    if choice == options[14]:
-        print("You have chosen Ah Puch!")
-        chosenMagical()
-    if choice == options[15]:
-        print("You have chosen Amaterasu!")
-        chosenPhysical()
-    if choice == options[16]:
-        print("You have chosen Anhur!")
-        chosenPhysical()
-    if choice == options[17]:
-        print("You have chosen Anubis!")
-        chosenMagical()
-    if choice == options[18]:
-        print("You have chosen Goobis!")
-        chosenMagical()
-    if choice == options[19]:
-        print("You have chosen Ao Kuang!")
-        chosenMagical()
-    if choice == options[20]:
-        print("You have chosen Aphrodite!")
-        chosenMagical()
-    if choice == options[21]:
-        print("You have chosen Apollo!")
-        chosenPhysical()
-    if choice == options [22]:
-        print("You have chosen Arachne!")
-        chosenPhysical()
-    if choice == options[23]:
-        print("You have chosen Ares!")
-        chosenMagical()
-    if choice == options[24]:
-        print("You have chosen Artemis!")
-        chosenPhysical()
-    if choice == options[25]:
-        print("You have chosen Artio!")
-        chosenMagical()
-    if choice == options[26]:
-        print("You have chosen Athena!")
-        chosenMagical()
-    if choice == options[27]:
-        print("You have chosen Awilix!")
-        chosenPhysical()
-    if choice == options[28]:
-        print("You have chosen Bacchus!")
-        chosenMagical()
-    if choice == options[29]:
-        print("You have chosen Bakasura!")
-        chosenPhysical()
-    if choice == options[30]:
-        print("You have chosen Baron Samedi!")
-        chosenMagical()
-    if choice == options[31]:
-        print("You have chosen Bastet!")
-        chosenPhysical()
-    if choice == options[32]:
-        print("You have chosen Bellona!")
-        chosenPhysical()
-    if choice == options[33]:
-        print("You have chosen Cabroken!")
-        chosenMagical()
-    if choice == options[34]:
-        print("You have chosen Camazotz!")
-        chosenPhysical()
-    if choice == options[35]:
-        print("You have chosen Cerberus!")
-        chosenMagical()
-    if choice == options[36]:
-        print("You have chosen Cernunnos!")
-        chosenPhysical()
-    if choice == options[37]:
-        print("You have chosen Chaac!")
-        chosenPhysical()
-    if choice == options[38]:
-        print("You have chosen Chang'e!")
-        chosenMagical()
-    if choice == options[39]:
-        print("You have chosen Chang'e!")
-        chosenMagical()
-    if choice == options[40]:
-        print("You have chosen Chernobog!")
-        chosenPhysical()
-    if choice == options[41]:
-        print("You have chosen Chiron!")
-        chosenPhysical()
-    if choice == options[42]:
-        print("You have chosen Chronos!")
-        chosenMagical()
-    if choice == options[43]:
-        print("You have chosen Cu Chulainn")
-        chosenPhysical()
-    if choice == options[44]:
-        print("You have chosen the Choo Choo Train!")
-        chosenPhysical()
-    if choice == options[45]:
-        print("You have chosen Cupid!")
-        chosenPhysical()
-    if choice == options[46]:
-        print("You have chosen Da Ji!")
-        chosenPhysical()
-    if choice == options[47]:
-        print("You have chosen Discordia!")
-        chosenMagical()
-    if choice == options[48]:
-        print("You have chosen Erlang Shen!")
-        chosenPhysical()
-    if choice == options [49]:
-        print("You have chosen Fafnir!")
-        chosenMagical()
-    if choice == options[50]:
-        print("You have chosen Fenrir!")
-        chosenPhysical()
-    if choice == options[51]:
-        print("You have chosen Freya!")
-        chosenMagical()
-    if choice == options[52]:
-        print("You have chosen Ganesha!")
-        chosenMagical()
-    if choice == options[53]:
-        print("You have chosen Ganesha!")
-        chosenMagical()
-    if choice == options[54]:
-        print("You have chosen Geb!")
-        chosenMagical()
-    if choice == options[55]:
-        print("You have chosen Guan Yu!")
-    if choice == options[56]:
-        print("You have chosen Hachiman!")
-        chosenPhysical()
-    if choice == options[57]:
-        print("You have chosen Hades!")
-        chosenPhysical()
-    if choice == options[58]:
-        print("You have chosen He Bo!")
-        chosenMagical()
-    if choice == options[59]:
-        print("You have chosen Hel!")
-        chosenMagical()
-    if choice == options[60]:
-        print("You have chosen Hercules!")
-        chosenPhysical()
-    if choice == options[61]:
-        print("You have chosen Hou Yi!")
-        chosenPhysical()
-    if choice == options[62]:
-        print("You have chosen Hun Batz!")
-        chosenPhysical()
-    if choice == options[63]:
-        print("You have chosen Isis!")
-        chosenMagical()
-    if choice == options[64]:
-        print("You have chosen Izanami!")
-        chosenPhysical()
-    if choice == options[65]:
-        print("You have chosen Janus!")
-        chosenMagical()
-    if choice == options[66]:
-        print("You have chosen Jing Wei!")
-        chosenPhysical()
-    if choice == options[67]:
-        print("You have chosen Kali!")
-        chosenPhysical()
-    if choice == options[68]:
-        print("You have chosen Khepri!")
-        chosenMagical()
-    if choice == options[69]:
-        print("You have chosen Kukulkan!")
-        chosenMagical()
-    if choice == options[70]:
-        print("You have chosen Kukulkan!")
-        chosenMagical()
-    if choice == options[71]:
-        print("You have chosen Kumbhakarna!")
-        chosenMagical()
-    if choice == options[72]:
-        print("You have chosen Kumbhakarna!")
-        chosenMagical()
-    if choice == options[73]:
-        print("You have chosen Kuzenbo, the King of the Kappa!")
-        chosenMagical()
-    if choice == options[74]:
-        print("You have chosen Loki!")
-        chosenPhysical()
-    if choice == options[75]:
-        print("You have chosen Loki!")
-        chosenPhysical()
-    if choice == options[76]:
-        print("You have chosen Medusa!")
-        chosenPhysical()
-    if choice == options[77]:
-        print("You have chosen Mercury!")
-        chosenPhysical()
-    if choice == options[78]:
-        print("You have chosen Ne Zha!")
-        chosenPhysical()
-    if choice == options[79]:
-        print("You have chosen the trap, Ne Zha!")
-        chosenPhysical()
-    if choice == options[80]:
-        print("You have chosen Neith!")
-        chosenPhysical()
-    if choice == options[81]:
-        print("You have chosen Nemesis!")
-        chosenPhysical()
-    if choice == options[82]:
-        print("You have chosen Nike!")
-        chosenPhysical()
-    if choice == options[83]:
-        print("You have chosen Nox!")
-        chosenMagical()
-    if choice == options[84]:
-        print("You have chosen Nu Wa!")
-        chosenMagical()
-    if choice == options[85]:
-        print("You have chosen Odin!")
-        chosenPhysical()
-    if choice == options[86]:
-        print("You have chosen Osiris!")
-        chosenPhysical()
-    if choice == options[87]:
-        print("You have chosen Poseidon!")
-        chosenMagical()
-    if choice == options[88]:
-        print("You have chosen Ra!")
-        chosenMagical()
-    if choice == options[89]:
-        print("You have chosen Raijin!")
-        chosenMagical()
-    if choice == options[90]:
-        print("You have chosen Rama!")
-        chosenPhysical()
-    if choice == options[91]:
+
+
+def select_god_by_class(c):
+    print("You have chosen a random ", c, "!")
+
+    classes = {
+        "assassin": physical,
+        "warrior": physical,
+        "hunter": physical,
+        "mage": magical,
+        "guardian": magical
+    }
+    classes[c]()
+
+
+def select_god_by_name(c):
+    if c == "ratatoskr":
         print("You have chosen Ratatoskr!")
         Ratatoskr()
-    if choice == options[92]:
-        print("You have chosen Ravana!")
-        chosenPhysical()
-    if choice == options[93]:
-        print("You have chosen Scylla!")
-        chosenMagical()
-    if choice == options[94]:
-        print("You have chosen Serqet!")
-        chosenPhysical()
-    if choice == options[95]:
-        print("You have chosen Skadi!")
-        chosenPhysical()
-    if choice == options[96]:
-        print("You have chosen Sobek!")
-        chosenMagical()
-    if choice == options[97]:
-        print("You have chosen Sol!")
-        chosenMagical()
-    if choice == options[98]:
-        print("You have chosen Sun Wukong!")
-        chosenPhysical()
-    if choice == options[99]:
-        print("You have chosen Susano!")
-        chosenPhysical()
-    if choice == options[100]:
-        print("You have chosen Sylvanus!")
-        chosenMagical()
-    if choice == options[101]:
-        print("You have chosen Terra!")
-        chosenMagical()
-    if choice == options[102]:
-        print("You have chosen Thanatos!")
-        chosenPhysical()
-    if choice == options[103]:
-        print("You have chosen The Morrigan!")
-        chosenMagical()
-    if choice == options[104]:
-        print("You have chosen Thor!")
-        chosenPhysical()
-    if choice == options[105]:
-        print("You have chosen Thoth!")
-        chosenMagical()
-    if choice == options[106]:
-        print("You have chosen the Ibis, Thoth! He's not a chicken!")
-        chosenMagical()
-    if choice == options[107]:
-        print("You have chosen Tyr!")
-        chosenPhysical()
-    if choice == options[108]:
-        print("You have chosen Ullr!")
-        chosenPhysical()
-    if choice == options[109]:
-        print("You have chosen Vamana!")
-        chosenPhysical()
-    if choice == options[110]:
-        print("You have chosen Vulcan!")
-        chosenMagical()
-    if choice == options[111]:
-        print("You have chosen Xbalanque!")
-        chosenPhysical()
-    if choice == options[112]:
-        print("You have chosen Xing Tian!")
-        chosenMagical()
-    if choice == options[113]:
-        print("You have chosen Ymir!")
-        chosenMagical()
-    if choice == options[114]:
-        print("You have chose the Guardian King of Duel's Main, Ymir!")
-        chosenMagical()
-    if choice == options[115]:
-        print("You have chosen Zeus!")
-        chosenMagical()
-    if choice == options[116]:
-        print("You have chosen Zhong Kui!")
-        chosenMagical()
-    if choice == options[117]:
-        print("You have chosen Ghostbusters!")
-        chosenMagical()
+    else:
+        god = gods.lst[gods.name_index[c]]
+
+        print("You have chosen ", god["name"], "!")
+
+        classes = {
+            "assassin": chosenPhysical,
+            "warrior": chosenPhysical,
+            "hunter": chosenPhysical,
+            "mage": chosenMagical,
+            "guardian": chosenMagical
+        }
+        classes[god["class"]]()
+
 
 def Ratatoskr():
     print("~//~"'\n')
@@ -2379,12 +2075,13 @@ def retry():
     retry = str(input(">>>")).lower()
 
     if retry == tryag[0]:
-        Start()
+        start()
     if retry== tryag[2]:
-        Start()
+        start()
     if retry == tryag[1]:
         exit()
     if retry == tryag[3]:
         exit()
 
-Start()
+
+start()

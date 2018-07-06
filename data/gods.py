@@ -1,4 +1,6 @@
-gods = [
+from random import randint
+
+lst = [
     {"id": "ares", "name": "Ares", "class": "guardian", "nicknames": []},
     {"id": "artio", "name": "Artio", "class": "guardian", "nicknames": []},
     {"id": "athena", "name": "Athena", "class": "guardian", "nicknames": []},
@@ -96,3 +98,15 @@ gods = [
     {"id": "thanatos", "name": "Thanatos", "class": "assassin", "nicknames": []},
     {"id": "thor", "name": "Thor", "class": "assassin", "nicknames": []},
 ]
+
+name_index = {}
+
+
+def init():
+    for i, god in enumerate(lst):
+        name_index[god['name'].lower()] = i
+        for nick in god['nicknames']:
+            name_index[nick.lower()] = i
+
+
+init()
